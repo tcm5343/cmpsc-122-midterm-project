@@ -22,17 +22,12 @@
  */
 #define PRINT_DEBUG 0
 
-/*
- * 
- */
-
 // function declaration
 void displayDefaultMenu();
 
 int main() {
-
+    
     displayDefaultMenu();
-
     return 0;
 }
 
@@ -41,7 +36,6 @@ int main() {
  * body of the function was taken from stackoverflow.
  * https://stackoverflow.com/questions/313970/how-to-convert-stdstring-to-lower-case
  * @param string - passed by reference
- * @return 
  */
 void toLowerCase(std::string& string) {
     std::transform(string.begin(), string.end(), string.begin(),
@@ -49,6 +43,13 @@ void toLowerCase(std::string& string) {
                 return std::tolower(c); });
 }
 
+/**
+ * Checks that the key exists in the map and returns the corresponding value to
+ * be used in a switch statement.
+ * @param map - depends on which menu is being validated, passed by reference
+ * @param input - input from the user (string)
+ * @return 
+ */
 int validateInput(std::map<std::string, int>& map, std::string input) {
     int map_value;
     toLowerCase(input);
@@ -66,6 +67,9 @@ int validateInput(std::map<std::string, int>& map, std::string input) {
     return map_value;
 }
 
+/**
+ * Displays the search menu, created a separate function for cleaner code.
+ */
 void displaySearchMenu() {
     std::map<std::string, int> search_menu_map;
     search_menu_map["exit"] = 0;
@@ -116,6 +120,9 @@ void displaySearchMenu() {
 
 }
 
+/**
+ * Displays the starting (default) menu
+ */
 void displayDefaultMenu() {
     std::map<std::string, int> default_menu_map;
     default_menu_map["quit"] = 0;
@@ -160,7 +167,7 @@ void displayDefaultMenu() {
 }
 
 /*
+ * Resources:
  * https://stackoverflow.com/questions/1939953/how-to-find-if-a-given-key-exists-in-a-c-stdmap
- * 
  * 
  */
