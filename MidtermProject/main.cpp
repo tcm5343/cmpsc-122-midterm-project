@@ -23,13 +23,54 @@
 #define PRINT_DEBUG 0
 
 // function declaration
-void displayDefaultMenu();
+void displaySearchMenu();
+int validateInput(std::map<std::string, int>& map, std::string input);
 
 int main() {
-    
-    displayDefaultMenu();
+
+    std::map<std::string, int> default_menu_map;
+    default_menu_map["quit"] = 0;
+    default_menu_map["search"] = 1;
+    default_menu_map["add"] = 2;
+
+    // display initial menu
+    std::string input;
+    int map_value = -1;
+    while (map_value != 0) {
+        std::cout << "Enter a command (commands are not case sensitive):" << std::endl;
+        std::cout << "Add - add a new automobile (cannot be in search mode)" << std::endl;
+        std::cout << "Search - put the program into search mode" << std::endl;
+        std::cout << "Quit - terminate the program" << std::endl;
+
+        std::cin >> input; // read in user input (map key)
+
+        // input validation: checks if the key exists in the map
+        map_value = validateInput(default_menu_map, input);
+
+        switch (map_value) {
+                // terminate program
+            case 0:
+                break;
+
+                // search
+            case 1:
+                std::cout << "Search selected" << std::endl;
+                displaySearchMenu();
+                break;
+
+                // add
+            case 2:
+                std::cout << "Add selected" << std::endl;
+                break;
+
+            default:
+                break;
+        }
+        std::cout << std::endl;
+    }
+
     return 0;
-}
+} // main()
 
 /**
  * User input is passed so that all the commands are not case sensitive. The
@@ -41,7 +82,7 @@ void toLowerCase(std::string& string) {
     std::transform(string.begin(), string.end(), string.begin(),
             [](unsigned char c) {
                 return std::tolower(c); });
-}
+} // toLowerCase()
 
 /**
  * Checks that the key exists in the map and returns the corresponding value to
@@ -63,9 +104,8 @@ int validateInput(std::map<std::string, int>& map, std::string input) {
         std::map<std::string, int>::iterator i = map.find(input); // find command in map
         map_value = i->second; // assign the commands value to use in switch
     }
-
     return map_value;
-}
+} // validateInput()
 
 /**
  * Displays the search menu, created a separate function for cleaner code.
@@ -81,7 +121,7 @@ void displaySearchMenu() {
     int map_value = -1;
 
     while (map_value != 0) {
-        std::cout << std::endl << "Search mode: enter a command (commands are not case sensitive)" << std::endl;
+        std::cout << std::endl << "Search mode: enter a command (commands are not case sensitive):" << std::endl;
         std::cout << "hasFeature - search by an attribute" << std::endl;
         std::cout << "checkAuto - print out the attributes about a car if it exists in your search list" << std::endl;
         std::cout << "Show - Shows the current list of automobiles that match all of the features you have listed as criteria thus far" << std::endl;
@@ -117,54 +157,7 @@ void displaySearchMenu() {
         }
         std::cout << std::endl;
     }
-
-}
-
-/**
- * Displays the starting (default) menu
- */
-void displayDefaultMenu() {
-    std::map<std::string, int> default_menu_map;
-    default_menu_map["quit"] = 0;
-    default_menu_map["search"] = 1;
-    default_menu_map["add"] = 2;
-
-    // display initial menu
-    std::string input;
-    int map_value = -1;
-    while (map_value != 0) {
-        std::cout << "Enter a command (commands are not case sensitive)" << std::endl;
-        std::cout << "Add - add a new automobile (cannot be in search mode)" << std::endl;
-        std::cout << "Search - put the program into search mode" << std::endl;
-        std::cout << "Quit - terminate the program" << std::endl;
-
-        std::cin >> input; // read in user input (map key)
-
-        // input validation: checks if the key exists in the map
-        map_value = validateInput(default_menu_map, input);
-
-        switch (map_value) {
-                // terminate program
-            case 0:
-                break;
-
-                // search
-            case 1:
-                std::cout << "Search selected" << std::endl;
-                displaySearchMenu();
-                break;
-
-                // add
-            case 2:
-                std::cout << "Add selected" << std::endl;
-                break;
-
-            default:
-                break;
-        }
-        std::cout << std::endl;
-    }
-}
+} // displaySearchMenu()
 
 /*
  * Resources:
