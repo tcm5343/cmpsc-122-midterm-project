@@ -192,6 +192,7 @@ void PrintTree(TreeNode* tree, std::ofstream& outFile)
   if (tree != NULL)
   {
     PrintTree(tree->left, outFile);   // Print left subtree.
+    tree->info.print();
     outFile << tree->info.toString();
     PrintTree(tree->right, outFile);  // Print right subtree.
   }
@@ -201,6 +202,7 @@ void TreeType::Print(std::ofstream& outFile) const
 // Calls recursive function Print to print items in the tree.
 {
   PrintTree(root, outFile);
+  std::cout << std::endl;
 }
 
 void Destroy(TreeNode*& tree);

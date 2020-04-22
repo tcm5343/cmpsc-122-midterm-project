@@ -13,6 +13,9 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
+#include <fstream>
+#include <string>
 
 #ifndef CARTYPE_H
 #define CARTYPE_H
@@ -23,6 +26,8 @@ public:
     std::string name;
     std::vector<std::string> attributes;
     std::string toString();
+    void print();
+    void initialize();
 
     bool operator<(const CarType& d) {
         if (name < d.name) {
@@ -45,6 +50,7 @@ public:
     }
 
 private:
+    void readFromCSV();
 
 };
 

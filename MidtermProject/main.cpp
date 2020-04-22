@@ -56,25 +56,25 @@ int main() {
     tree.PutItem(item1);
     tree.PutItem(item2);
     
+//    item.print();
     
+    std::string outFileName = "test.txt";
+    std::ofstream outFile; 
+    outFile.open(outFileName.c_str());
+    tree.Print(outFile);
+    outFile.close();
     
     std::map<std::string, int> default_menu_map;
     default_menu_map["quit"] = 0;
     default_menu_map["search"] = 1;
     default_menu_map["add"] = 2;
     
-//    ItemType item;
-//    item.name = "Name";
-//    item.attributes.push_back("Attr 1");
-//    item.attributes.push_back("Attr 2");
-//    std::cout << item.toString() << std::endl;
-    
     // display initial menu
     std::string input;
     int map_value = -1;
     while (map_value != 0) {
         std::cout << "Enter a command (commands are not case sensitive):" << std::endl;
-        std::cout << "Add - add a new automobile (cannot be in search mode)" << std::endl;
+        std::cout << "Add - add a new automobile" << std::endl;
         std::cout << "Search - put the program into search mode" << std::endl;
         std::cout << "Quit - terminate the program" << std::endl;
 
