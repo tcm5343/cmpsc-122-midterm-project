@@ -4,6 +4,9 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>CarType.h</itemPath>
+      <itemPath>QueType.h</itemPath>
+      <itemPath>TreeType.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -12,6 +15,9 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>CarType.cpp</itemPath>
+      <itemPath>QueType.cpp</itemPath>
+      <itemPath>TreeType.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -40,6 +46,18 @@
           <commandlineTool>g++</commandlineTool>
         </ccTool>
       </compileType>
+      <item path="CarType.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="CarType.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="QueType.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="QueType.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TreeType.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="TreeType.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
@@ -64,6 +82,18 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="CarType.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="CarType.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="QueType.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="QueType.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TreeType.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="TreeType.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>

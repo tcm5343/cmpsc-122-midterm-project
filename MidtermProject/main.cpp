@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -11,11 +11,18 @@
  * Created on April 20, 2020, 1:00 PM
  */
 
+#include <string>
+#include <fstream>
+#include <iostream>
+#include <cstring>
 #include <iostream>
 #include <string>
 #include <map>
 #include <algorithm>
 #include <cctype>
+
+#include "CarType.h"
+#include "TreeType.h"
 
 /*
  * if PRINT_DEBUG value equals 1 then it will print the actions performed
@@ -28,11 +35,40 @@ int validateInput(std::map<std::string, int>& map, std::string input);
 
 int main() {
 
+    TreeType tree;
+    
+    CarType item;
+    item.name = "C";
+    item.attributes.push_back("Attr 1");
+    item.attributes.push_back("Attr 2");
+    
+    CarType item1;
+    item1.name = "B";
+    item1.attributes.push_back("Attr 1");
+    
+    CarType item2;
+    item2.name = "A";
+    item2.attributes.push_back("Attr 1");
+    item2.attributes.push_back("Attr 2");
+    item2.attributes.push_back("Attr 3");
+    
+    tree.PutItem(item);
+    tree.PutItem(item1);
+    tree.PutItem(item2);
+    
+    
+    
     std::map<std::string, int> default_menu_map;
     default_menu_map["quit"] = 0;
     default_menu_map["search"] = 1;
     default_menu_map["add"] = 2;
-
+    
+//    ItemType item;
+//    item.name = "Name";
+//    item.attributes.push_back("Attr 1");
+//    item.attributes.push_back("Attr 2");
+//    std::cout << item.toString() << std::endl;
+    
     // display initial menu
     std::string input;
     int map_value = -1;
@@ -164,3 +200,4 @@ void displaySearchMenu() {
  * https://stackoverflow.com/questions/1939953/how-to-find-if-a-given-key-exists-in-a-c-stdmap
  * 
  */
+
