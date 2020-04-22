@@ -27,14 +27,19 @@ void CarType::initialize() {
 }
 
 void CarType::print() {
-    
+
     // print out to console and output file
     std::cout << "Name: " << this->name << std::endl;
     std::cout << "Attributes: ";
-    std::cout << std::setw(40-12) << std::left << attributes[0] << std::endl;
-    for (std::vector<std::string>::iterator i = this->attributes.begin()+1; i != this->attributes.end(); ++i) {
-        // I apologize about the block of spaces
-        std::cout << "            " << *i << std::endl;
+    if (attributes.size() > 0) { // if there are attributes
+        std::cout << std::setw(40 - 12) << std::left << attributes[0] << std::endl;
+
+        for (std::vector<std::string>::iterator i = this->attributes.begin() + 1; i != this->attributes.end(); ++i) {
+            // I apologize about the block of spaces
+            std::cout << "            " << *i << std::endl;
+        }
+    } else { // if there are attributes
+        std::cout << "None" << std::endl;
     }
 }
 

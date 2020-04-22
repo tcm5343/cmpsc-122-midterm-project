@@ -1,4 +1,4 @@
-    /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -16,7 +16,6 @@
 #include <iostream>
 #include <cstring>
 #include <iostream>
-#include <string>
 #include <map>
 #include <algorithm>
 #include <cctype>
@@ -32,43 +31,41 @@
 // function declaration
 void displaySearchMenu();
 int validateInput(std::map<std::string, int>& map, std::string input);
+CarType addCarType();
 
 int main() {
 
     TreeType tree;
-    
+
     CarType item;
     item.name = "C";
     item.attributes.push_back("Attr 1");
     item.attributes.push_back("Attr 2");
-    
+
     CarType item1;
     item1.name = "B";
-    item1.attributes.push_back("Attr 1");
-    
+
     CarType item2;
     item2.name = "A";
     item2.attributes.push_back("Attr 1");
     item2.attributes.push_back("Attr 2");
     item2.attributes.push_back("Attr 3");
-    
+
     tree.PutItem(item);
     tree.PutItem(item1);
     tree.PutItem(item2);
-    
-//    item.print();
-    
+
     std::string outFileName = "test.txt";
-    std::ofstream outFile; 
+    std::ofstream outFile;
     outFile.open(outFileName.c_str());
     tree.Print(outFile);
     outFile.close();
-    
+
     std::map<std::string, int> default_menu_map;
     default_menu_map["quit"] = 0;
     default_menu_map["search"] = 1;
     default_menu_map["add"] = 2;
-    
+
     // display initial menu
     std::string input;
     int map_value = -1;
@@ -97,6 +94,7 @@ int main() {
                 // add
             case 2:
                 std::cout << "Add selected" << std::endl;
+                tree.PutItem(addCarType());
                 break;
 
             default:
@@ -114,10 +112,11 @@ int main() {
  * https://stackoverflow.com/questions/313970/how-to-convert-stdstring-to-lower-case
  * @param string - passed by reference
  */
-void toLowerCase(std::string& string) {
+std::string toLowerCase(std::string& string) {
     std::transform(string.begin(), string.end(), string.begin(),
             [](unsigned char c) {
                 return std::tolower(c); });
+    return string;
 } // toLowerCase()
 
 /**
@@ -129,7 +128,7 @@ void toLowerCase(std::string& string) {
  */
 int validateInput(std::map<std::string, int>& map, std::string input) {
     int map_value;
-    toLowerCase(input);
+    input = toLowerCase(input);
     // input validation: checks if the key exists in the map
     if (map.find(input) == map.end()) {
         // not found
@@ -194,6 +193,38 @@ void displaySearchMenu() {
         std::cout << std::endl;
     }
 } // displaySearchMenu()
+
+/**
+ * I included this in main because it includes a menu and I thought it 
+ * was the right place
+ * @return 
+ */
+CarType addCarType() {
+    CarType car;
+
+    // car name
+    std::string name;
+    std::string attr = "";
+    std::cout << "Please enter the name of the car: " << std::endl;
+    std::cin >> name;
+    car.name = name;
+
+    // car attributes
+    std::cout << "_Please enter car attributes, one per line, when finished enter 'End': " << std::endl;
+    do {
+        if (toLowerCase(attr) == "end") {
+            break;
+        } else {
+            std::cout << "Enter an attribute: " << std::endl;
+            std::cin >> attr;
+            car.attributes.push_back(attr);
+            toLowerCase(attr);
+        }
+    } while (attr != "end");
+
+    std::cout << car.toString() << std::endl;
+    return car;
+}
 
 /*
  * Resources:

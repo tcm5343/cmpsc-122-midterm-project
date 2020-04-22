@@ -1,1 +1,1 @@
-A Attr 1 Attr 2 Attr 3B Attr 1C Attr 1 Attr 2
+A Attr 1 Attr 2 Attr 3BC Attr 1 Attr 2
