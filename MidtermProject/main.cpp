@@ -200,6 +200,7 @@ CarType addCarType() {
     }
 
     std::cout << car.toString() << std::endl;
+    car.addToFile();
     return car;
 }
 

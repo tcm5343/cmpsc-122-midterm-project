@@ -91,7 +91,7 @@ void Insert(TreeNode*& tree, CarType item);
 void TreeType::PutItem(CarType item)
 // Calls recursive function Insert to insert item into tree.
 {
-    item.addToFile();
+//    item.addToFile();
     Insert(root, item);
 }
 

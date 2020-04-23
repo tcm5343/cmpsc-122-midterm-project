@@ -46,7 +46,7 @@ std::string CarType::toString() {
 
 void CarType::addToFile() {
 
-    //    std::string outFileName = INPUT_FILE;
+    // std::string outFileName = INPUT_FILE;
     std::ofstream outFile;
     outFile.open(INPUT_FILE, std::ios::app);
 
@@ -57,9 +57,11 @@ void CarType::addToFile() {
             // I apologize about the block of spaces
             outFile << "," << *i;
         }
+
     } else { // if there are attributes
         outFile << "None" << std::endl;
     }
+    outFile << std::endl;
 
     outFile.close();
 }
