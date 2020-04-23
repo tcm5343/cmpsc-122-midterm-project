@@ -4,17 +4,16 @@
 
 #include "CarType.h"
 
-class FullQueue
-{};  
+class FullQueue {
+};
 
-class EmptyQueue
-{};  
+class EmptyQueue {
+};
 
 struct NodeType;
 
-class QueType
-{
-public: 
+class QueType {
+public:
     QueType();
     // Class constructor.
     // Because there is a default constructor, the precondition 
@@ -46,6 +45,6 @@ public:
     //       item is a copy of removed element.
 private:
 
-  NodeType* front;
-  NodeType* rear;
+    NodeType* front;
+    NodeType* rear;
 };

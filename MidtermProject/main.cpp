@@ -15,7 +15,6 @@
 #include <fstream>
 #include <iostream>
 #include <cstring>
-#include <iostream>
 #include <map>
 #include <algorithm>
 #include <cctype>
@@ -35,31 +34,9 @@ CarType addCarType();
 
 int main() {
 
+    // init variables
     TreeType tree;
-
-    CarType item;
-    item.name = "C";
-    item.attributes.push_back("Attr 1");
-    item.attributes.push_back("Attr 2");
-
-    CarType item1;
-    item1.name = "B";
-
-    CarType item2;
-    item2.name = "A";
-    item2.attributes.push_back("Attr 1");
-    item2.attributes.push_back("Attr 2");
-    item2.attributes.push_back("Attr 3");
-
-    tree.PutItem(item);
-    tree.PutItem(item1);
-    tree.PutItem(item2);
-
-    std::string outFileName = "test.txt";
-    std::ofstream outFile;
-    outFile.open(outFileName.c_str());
-    tree.Print(outFile);
-    outFile.close();
+    tree.initialize();
 
     std::map<std::string, int> default_menu_map;
     default_menu_map["quit"] = 0;
@@ -196,7 +173,7 @@ void displaySearchMenu() {
 
 /**
  * I included this in main because it includes a menu and I thought it 
- * was the right place
+ * was better than in CarType..
  * @return 
  */
 CarType addCarType() {
@@ -211,16 +188,16 @@ CarType addCarType() {
 
     // car attributes
     std::cout << "_Please enter car attributes, one per line, when finished enter 'End': " << std::endl;
-    do {
+    while (attr != "end") {
+        std::cout << "Enter an attribute: " << std::endl;
+        std::cin >> attr;
         if (toLowerCase(attr) == "end") {
             break;
         } else {
-            std::cout << "Enter an attribute: " << std::endl;
-            std::cin >> attr;
             car.attributes.push_back(attr);
             toLowerCase(attr);
         }
-    } while (attr != "end");
+    }
 
     std::cout << car.toString() << std::endl;
     return car;

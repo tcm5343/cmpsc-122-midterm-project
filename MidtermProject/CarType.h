@@ -20,14 +20,16 @@
 #ifndef CARTYPE_H
 #define CARTYPE_H
 
+#define INPUT_FILE "autodata.txt"
+
 class CarType {
 public:
     CarType();
     std::string name;
     std::vector<std::string> attributes;
     std::string toString();
+    void addToFile();
     void print();
-    void initialize();
 
     bool operator<(const CarType& d) {
         if (name < d.name) {
@@ -50,7 +52,6 @@ public:
     }
 
 private:
-    void readFromCSV();
 
 };
 

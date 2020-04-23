@@ -16,19 +16,12 @@
 
 #include "CarType.h"
 
-#define INPUT_FILE "autodata.txt"
-#define OUTPUT_FILE "output.txt"
-
 CarType::CarType() {
-}
-
-void CarType::initialize() {
-    readFromCSV();
 }
 
 void CarType::print() {
 
-    // print out to console and output file
+    // print out to console
     std::cout << "Name: " << this->name << std::endl;
     std::cout << "Attributes: ";
     if (attributes.size() > 0) { // if there are attributes
@@ -51,20 +44,22 @@ std::string CarType::toString() {
     return result;
 }
 
-void CarType::readFromCSV() {
-    // variable declarations
-    std::ifstream inputFile;
-    std::string str;
+void CarType::addToFile() {
 
-    // reads each line of the inputFile and adds it to the vector
-    inputFile.open(INPUT_FILE);
-    while (std::getline(inputFile, str)) {
+    //    std::string outFileName = INPUT_FILE;
+    std::ofstream outFile;
+    outFile.open(INPUT_FILE, std::ios::app);
 
-        std::cout << str.substr(0, str.find(",")) << std::endl;
-        while (!str.empty() && str.find(",") != -1) {
-            str = str.substr(str.find(",") + 1, str.length()); // shortens the str
-            std::cout << str.substr(0, str.find(",")) << std::endl;
+    // appends to input file
+    outFile << this->name;
+    if (attributes.size() > 0) { // if there are attributes
+        for (std::vector<std::string>::iterator i = this->attributes.begin(); i != this->attributes.end(); ++i) {
+            // I apologize about the block of spaces
+            outFile << "," << *i;
         }
+    } else { // if there are attributes
+        outFile << "None" << std::endl;
     }
-    inputFile.close();
+
+    outFile.close();
 }
