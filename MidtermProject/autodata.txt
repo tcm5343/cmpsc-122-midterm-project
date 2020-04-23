@@ -1,4 +1,1 @@
-test1,attr
-test2,attr1,attr3
-name,attr,attr2,attr3
-name2,attr3
+car1,attr1,attr2,attr3

@@ -33,11 +33,11 @@ int validateInput(std::map<std::string, int>& map, std::string input);
 CarType addCarType();
 
 int main() {
-
-    // init variables
+    
+    // initialize variables
     TreeType tree;
     tree.initialize();
-
+    
     std::map<std::string, int> default_menu_map;
     default_menu_map["quit"] = 0;
     default_menu_map["search"] = 1;
@@ -67,19 +67,19 @@ int main() {
                 std::cout << "Search selected" << std::endl;
                 displaySearchMenu();
                 break;
-
+                
                 // add
             case 2:
                 std::cout << "Add selected" << std::endl;
                 tree.PutItem(addCarType());
                 break;
-
+                
             default:
                 break;
         }
         std::cout << std::endl;
     }
-
+    
     return 0;
 } // main()
 
@@ -198,8 +198,8 @@ CarType addCarType() {
             toLowerCase(attr);
         }
     }
-
-    std::cout << car.toString() << std::endl;
+    
+//    std::cout << car.toString() << std::endl;
     car.addToFile();
     return car;
 }
