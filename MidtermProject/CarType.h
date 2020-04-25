@@ -30,6 +30,7 @@ public:
     std::string toString();
     void addToFile();
     void print();
+    bool hasFeature(std::string feature);
 
     bool operator<(const CarType& d) {
         if (name < d.name) {

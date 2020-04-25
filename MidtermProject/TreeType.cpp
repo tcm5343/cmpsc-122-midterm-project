@@ -345,10 +345,56 @@ void TreeType::readFromCSV() {
         // adds car to tree
         this->PutItem(car);
     }
-
     inputFile.close();
 }
 
 void TreeType::initialize() {
     readFromCSV();
+}
+
+void show(TreeNode* tree, std::ofstream& outFile) {
+    if (tree != NULL) {
+        show(tree->left, outFile); // Print left subtree.
+        outFile << tree->info.name << std::endl;
+        show(tree->right, outFile); // Print right subtree.
+    }
+}
+
+void TreeType::showCommand(std::ofstream& outFile) const {
+    show(root, outFile);
+    outFile << std::endl;
+    std::cout << std::endl;
+}
+
+void findCar(TreeNode* tree, std::string carName)
+{
+    if (tree == NULL)
+        std::cout << "Car was not found" << std::endl; // item is not found.
+    else if (carName < tree->info.name)
+        findCar(tree->left, carName); // Search left subtree.
+    else if (carName > tree->info.name)
+        findCar(tree->right, carName); // Search right subtree.
+    else { // item is found
+        tree->info.print();
+    }
+}
+
+void TreeType::checkAuto(std::string carName) {
+    findCar(root, carName);
+}
+
+void checkFeature(TreeNode* root, std::string feature, std::vector<CarType>& featurlessCars)
+{
+    if (root != NULL) {
+        checkFeature(root->left, feature, featurlessCars); // iterate over the left subtree.
+        if (!root->info.hasFeature(feature)) { // if the tree does not have the feature
+            std::cout << "found a node to delete";
+            featurlessCars.push_back(root->info);
+        }
+        checkFeature(root->right, feature, featurlessCars); // iterate over the right subtree.
+    }
+}
+
+void TreeType::hasFeature(std::string feature, std::vector<CarType>& featurlessCars) {
+    checkFeature(root, feature, featurlessCars);
 }

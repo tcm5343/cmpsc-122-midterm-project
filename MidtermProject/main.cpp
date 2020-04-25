@@ -26,18 +26,25 @@
  * if PRINT_DEBUG value equals 1 then it will print the actions performed
  */
 #define PRINT_DEBUG 0
+#define OUTPUT_FILE "results.txt"
 
 // function declaration
-void displaySearchMenu();
+void displaySearchMenu(TreeType& searchTree);
 int validateInput(std::map<std::string, int>& map, std::string input);
 CarType addCarType();
 
 int main() {
-    
+
     // initialize variables
     TreeType tree;
     tree.initialize();
     
+//    TreeType tree2;
+//    CarType car;
+//    car.name = "car";
+//    tree2.PutItem(car);
+//    tree2.DeleteItem(car);
+
     std::map<std::string, int> default_menu_map;
     default_menu_map["quit"] = 0;
     default_menu_map["search"] = 1;
@@ -52,7 +59,8 @@ int main() {
         std::cout << "Search - put the program into search mode" << std::endl;
         std::cout << "Quit - terminate the program" << std::endl;
 
-        std::cin >> input; // read in user input (map key)
+        std::getline(std::cin, input); // read in user input (map key)
+        TreeType searchTree(tree); // tree which will be searched if need be
 
         // input validation: checks if the key exists in the map
         map_value = validateInput(default_menu_map, input);
@@ -64,22 +72,22 @@ int main() {
 
                 // search
             case 1:
-                std::cout << "Search selected" << std::endl;
-                displaySearchMenu();
+                std::cout << std::endl << "Search selected" << std::endl;
+
+                displaySearchMenu(searchTree);
                 break;
-                
+
                 // add
             case 2:
-                std::cout << "Add selected" << std::endl;
                 tree.PutItem(addCarType());
                 break;
-                
+
             default:
                 break;
         }
         std::cout << std::endl;
     }
-    
+
     return 0;
 } // main()
 
@@ -122,12 +130,24 @@ int validateInput(std::map<std::string, int>& map, std::string input) {
 /**
  * Displays the search menu, created a separate function for cleaner code.
  */
-void displaySearchMenu() {
+void displaySearchMenu(TreeType& searchTree) {
+
     std::map<std::string, int> search_menu_map;
     search_menu_map["exit"] = 0;
     search_menu_map["hasfeature"] = 1;
     search_menu_map["checkauto"] = 2;
     search_menu_map["show"] = 3;
+
+    // initialize writing to file
+    std::ofstream file;
+    file.open(OUTPUT_FILE, std::ios::app);
+
+    // find name of search from user
+    std::cout << "Please enter the name of the search:" << std::endl;
+    std::string nameOfSearch;
+    std::getline(std::cin, nameOfSearch);
+    // write name of search to file
+    file << "Name of search: " << nameOfSearch << std::endl;
 
     std::string input;
     int map_value = -1;
@@ -138,37 +158,43 @@ void displaySearchMenu() {
         std::cout << "checkAuto - print out the attributes about a car if it exists in your search list" << std::endl;
         std::cout << "Show - Shows the current list of automobiles that match all of the features you have listed as criteria thus far" << std::endl;
         std::cout << "Exit - exit search mode" << std::endl;
-
-        std::cin >> input; // read in user input (map key)
+        std::getline(std::cin, input); // read in user input (map key)
 
         // input validation: checks if the key exists in the map
         map_value = validateInput(search_menu_map, input);
+        std::string carName, feature;
+        std::vector<CarType> featurlessCars;
 
         switch (map_value) {
-                // terminate program
-            case 0:
+
+            case 0: // terminate program
                 break;
 
-                // hasFeature
-            case 1:
-                std::cout << "hasFeature selected" << std::endl;
+            case 1: // hasFeature
+                std::cout << "Enter a feature: " << std::endl;
+                std::getline(std::cin, feature);
+                searchTree.hasFeature(feature, featurlessCars);
+                for (std::vector<CarType>::iterator i = featurlessCars.begin(); i != featurlessCars.end(); ++i) {
+                    searchTree.DeleteItem(*i);
+                }
                 break;
 
-                // checkAuto
-            case 2:
-                std::cout << "checkAuto selected" << std::endl;
+            case 2: // checkAuto
+                std::cout << "Enter the name of the car: " << std::endl;
+                std::getline(std::cin, carName);
+                searchTree.checkAuto(carName);
                 break;
 
-                // Show
-            case 3:
-                std::cout << "Show selected" << std::endl;
+            case 3: // Show
+                searchTree.showCommand(file);
                 break;
 
             default:
                 break;
         }
-        std::cout << std::endl;
     }
+
+    file.close();
 } // displaySearchMenu()
 
 /**
@@ -182,15 +208,15 @@ CarType addCarType() {
     // car name
     std::string name;
     std::string attr = "";
-    std::cout << "Please enter the name of the car: " << std::endl;
-    std::cin >> name;
+    std::cout << std::endl << "Please enter the name of the car: " << std::endl;
+    std::getline(std::cin, name);
     car.name = name;
 
     // car attributes
     std::cout << "_Please enter car attributes, one per line, when finished enter 'End': " << std::endl;
     while (attr != "end") {
         std::cout << "Enter an attribute: " << std::endl;
-        std::cin >> attr;
+        std::getline(std::cin, attr);
         if (toLowerCase(attr) == "end") {
             break;
         } else {
@@ -198,8 +224,8 @@ CarType addCarType() {
             toLowerCase(attr);
         }
     }
-    
-//    std::cout << car.toString() << std::endl;
+
+    //    std::cout << car.toString() << std::endl;
     car.addToFile();
     return car;
 }

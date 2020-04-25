@@ -62,6 +62,17 @@ void CarType::addToFile() {
         outFile << "None" << std::endl;
     }
     outFile << std::endl;
-
     outFile.close();
+}
+
+bool CarType::hasFeature(std::string feature) {
+    bool result = false;
+    // iterate over the attributes
+    for (std::vector<std::string>::iterator i = this->attributes.begin(); i != this->attributes.end(); ++i) {
+        if (feature == *i) { // if the attribute is found
+            result = true;
+            break;
+        }
+    }
+    return result;
 }
