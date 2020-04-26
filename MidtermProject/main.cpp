@@ -39,11 +39,11 @@ int main() {
     TreeType tree;
     tree.initialize();
     
-//    TreeType tree2;
-//    CarType car;
-//    car.name = "car";
-//    tree2.PutItem(car);
-//    tree2.DeleteItem(car);
+    TreeType tree2;
+    CarType car;
+    car.name = "car";
+    tree2.PutItem(car);
+    tree2.DeleteItem(car);
 
     std::map<std::string, int> default_menu_map;
     default_menu_map["quit"] = 0;
@@ -73,12 +73,12 @@ int main() {
                 // search
             case 1:
                 std::cout << std::endl << "Search selected" << std::endl;
-
                 displaySearchMenu(searchTree);
                 break;
 
                 // add
             case 2:
+                std::cout << std::endl << "Add selected" << std::endl;
                 tree.PutItem(addCarType());
                 break;
 
@@ -146,6 +146,8 @@ void displaySearchMenu(TreeType& searchTree) {
     std::cout << "Please enter the name of the search:" << std::endl;
     std::string nameOfSearch;
     std::getline(std::cin, nameOfSearch);
+    std::cout << std::endl;
+    
     // write name of search to file
     file << "Name of search: " << nameOfSearch << std::endl;
 
@@ -153,13 +155,14 @@ void displaySearchMenu(TreeType& searchTree) {
     int map_value = -1;
 
     while (map_value != 0) {
-        std::cout << std::endl << "Search mode: enter a command (commands are not case sensitive):" << std::endl;
+        std::cout << "Search mode: enter a command (commands are not case sensitive):" << std::endl;
         std::cout << "hasFeature - search by an attribute" << std::endl;
         std::cout << "checkAuto - print out the attributes about a car if it exists in your search list" << std::endl;
         std::cout << "Show - Shows the current list of automobiles that match all of the features you have listed as criteria thus far" << std::endl;
         std::cout << "Exit - exit search mode" << std::endl;
         std::getline(std::cin, input); // read in user input (map key)
-
+        std::cout << std::endl;
+        
         // input validation: checks if the key exists in the map
         map_value = validateInput(search_menu_map, input);
         std::string carName, feature;
@@ -224,8 +227,6 @@ CarType addCarType() {
             toLowerCase(attr);
         }
     }
-
-    //    std::cout << car.toString() << std::endl;
     car.addToFile();
     return car;
 }

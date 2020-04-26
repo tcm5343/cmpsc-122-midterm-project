@@ -37,7 +37,7 @@ public:
             return true;
         }
         if (name == d.name) {
-            return true;
+            return false;
         }
         return false;
     }
@@ -47,7 +47,7 @@ public:
             return true;
         }
         if (name == d.name) {
-            return true;
+            return false;
         }
         return false;
     }

@@ -381,6 +381,7 @@ void findCar(TreeNode* tree, std::string carName)
 
 void TreeType::checkAuto(std::string carName) {
     findCar(root, carName);
+    std::cout << std::endl;
 }
 
 void checkFeature(TreeNode* root, std::string feature, std::vector<CarType>& featurlessCars)
@@ -388,7 +389,6 @@ void checkFeature(TreeNode* root, std::string feature, std::vector<CarType>& fea
     if (root != NULL) {
         checkFeature(root->left, feature, featurlessCars); // iterate over the left subtree.
         if (!root->info.hasFeature(feature)) { // if the tree does not have the feature
-            std::cout << "found a node to delete";
             featurlessCars.push_back(root->info);
         }
         checkFeature(root->right, feature, featurlessCars); // iterate over the right subtree.
@@ -397,4 +397,5 @@ void checkFeature(TreeNode* root, std::string feature, std::vector<CarType>& fea
 
 void TreeType::hasFeature(std::string feature, std::vector<CarType>& featurlessCars) {
     checkFeature(root, feature, featurlessCars);
+    std::cout << std::endl;
 }
