@@ -33,7 +33,7 @@ public:
     void initialize();
     void showCommand(std::ofstream& outFile) const;
     void checkAuto(std::string carName);
-    void hasFeature(std::string feature, std::vector<CarType>& featurlessCars);
+    void hasFeature(std::string feature);
 private:
     void readFromCSV();
     TreeNode* root;

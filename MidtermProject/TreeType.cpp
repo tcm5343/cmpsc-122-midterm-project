@@ -363,7 +363,6 @@ void show(TreeNode* tree, std::ofstream& outFile) {
 void TreeType::showCommand(std::ofstream& outFile) const {
     show(root, outFile);
     outFile << std::endl;
-    std::cout << std::endl;
 }
 
 void findCar(TreeNode* tree, std::string carName)
@@ -384,18 +383,18 @@ void TreeType::checkAuto(std::string carName) {
     std::cout << std::endl;
 }
 
-void checkFeature(TreeNode* root, std::string feature, std::vector<CarType>& featurlessCars)
+void checkFeature(TreeNode* root, TreeNode* currentNode, std::string feature)
 {
-    if (root != NULL) {
-        checkFeature(root->left, feature, featurlessCars); // iterate over the left subtree.
-        if (!root->info.hasFeature(feature)) { // if the tree does not have the feature
-            featurlessCars.push_back(root->info);
+    if (currentNode != NULL) {
+        checkFeature(root, currentNode->left, feature); // iterate over the left subtree.
+        if (!currentNode->info.hasFeature(feature)) { // if the tree does not have the feature
+            Delete(root, currentNode->info);
         }
-        checkFeature(root->right, feature, featurlessCars); // iterate over the right subtree.
+        checkFeature(root, currentNode->right, feature); // iterate over the right subtree.
     }
 }
 
-void TreeType::hasFeature(std::string feature, std::vector<CarType>& featurlessCars) {
-    checkFeature(root, feature, featurlessCars);
+void TreeType::hasFeature(std::string feature) {
+    checkFeature(root, root, feature);
     std::cout << std::endl;
 }

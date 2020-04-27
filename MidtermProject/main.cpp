@@ -38,7 +38,7 @@ int main() {
     // initialize variables
     TreeType tree;
     tree.initialize();
-    
+
     TreeType tree2;
     CarType car;
     car.name = "car";
@@ -147,7 +147,7 @@ void displaySearchMenu(TreeType& searchTree) {
     std::string nameOfSearch;
     std::getline(std::cin, nameOfSearch);
     std::cout << std::endl;
-    
+
     // write name of search to file
     file << "Name of search: " << nameOfSearch << std::endl;
 
@@ -162,7 +162,7 @@ void displaySearchMenu(TreeType& searchTree) {
         std::cout << "Exit - exit search mode" << std::endl;
         std::getline(std::cin, input); // read in user input (map key)
         std::cout << std::endl;
-        
+
         // input validation: checks if the key exists in the map
         map_value = validateInput(search_menu_map, input);
         std::string carName, feature;
@@ -176,10 +176,10 @@ void displaySearchMenu(TreeType& searchTree) {
             case 1: // hasFeature
                 std::cout << "Enter a feature: " << std::endl;
                 std::getline(std::cin, feature);
-                searchTree.hasFeature(feature, featurlessCars);
-                for (std::vector<CarType>::iterator i = featurlessCars.begin(); i != featurlessCars.end(); ++i) {
-                    searchTree.DeleteItem(*i);
-                }
+                searchTree.hasFeature(feature);
+//                for (std::vector<CarType>::iterator i = featurlessCars.begin(); i != featurlessCars.end(); ++i) {
+//                    searchTree.DeleteItem(*i);
+//                }
                 break;
 
             case 2: // checkAuto

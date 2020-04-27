@@ -36,20 +36,18 @@ public:
         if (name < d.name) {
             return true;
         }
-        if (name == d.name) {
+        else {
             return false;
         }
-        return false;
     }
 
     bool operator>(const CarType& d) {
         if (name > d.name) {
             return true;
         }
-        if (name == d.name) {
+        else {
             return false;
         }
-        return false;
     }
 
 private:
