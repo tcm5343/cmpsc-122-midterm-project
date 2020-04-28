@@ -1,11 +1,7 @@
 
 #include "TreeType.h"
 
-struct TreeNode {
-    CarType info;
-    TreeNode* left;
-    TreeNode* right;
-};
+
 void CopyTree(TreeNode*& copy, const TreeNode* originalTree);
 
 TreeType::TreeType() {
@@ -404,9 +400,30 @@ void TreeType::hasFeature(std::string feature) {
     checkFeature(root, feature, tree);
     this->MakeEmpty();
     CopyTree(root, tree.root);
-    //    // clear the current search tree
-    //    // set the search tree to the new tree
-    //    this->operator =(tree);
+    // clear the current search tree
+    // set the search tree to the new tree
 
     std::cout << std::endl;
+}
+
+TreeNode* TreeType::getRoot(){
+    return root;
+}
+
+bool doesCarExistRecursive(TreeNode* tree, const std::string carName, bool& doesCarExist) {
+    if (tree == NULL)
+        doesCarExist = false; // item is not found.
+    else if (carName < tree->info.name)
+        doesCarExistRecursive(tree->left, carName, doesCarExist); // Search left subtree.
+    else if (carName > tree->info.name)
+        doesCarExistRecursive(tree->right, carName, doesCarExist); // Search right subtree.
+    else { // item is found
+        doesCarExist = true;
+    }
+}
+
+bool TreeType::doesCarExist(const std::string carName){
+    bool doesCarExist;
+    doesCarExistRecursive(root, carName, doesCarExist);
+    return doesCarExist;
 }

@@ -59,7 +59,7 @@ void CarType::addToFile() {
         }
 
     } else { // if there are attributes
-        outFile << "None" << std::endl;
+        outFile << ",None" << std::endl;
     }
     outFile << std::endl;
     outFile.close();

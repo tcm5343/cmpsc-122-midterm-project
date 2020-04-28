@@ -31,7 +31,7 @@
 // function declaration
 void displaySearchMenu(TreeType& searchTree);
 int validateInput(std::map<std::string, int>& map, std::string input);
-CarType addCarType();
+CarType addCarType(TreeType& searchTree);
 
 int main() {
 
@@ -39,16 +39,16 @@ int main() {
     TreeType tree;
     tree.initialize();
 
-//    TreeType tree2;
-//    CarType car;
-//    car.name = "car";
-//    tree2.PutItem(car);
-//    
-//    CarType car2;
-//    car2 = car;
-//    tree2.PutItem(car2);
-//    
-//    tree2.DeleteItem(car);
+    //    TreeType tree2;
+    //    CarType car;
+    //    car.name = "car";
+    //    tree2.PutItem(car);
+    //    
+    //    CarType car2;
+    //    car2 = car;
+    //    tree2.PutItem(car2);
+    //    
+    //    tree2.DeleteItem(car);
 
     // an enum would probably be best but I never used a map before
     std::map<std::string, int> default_menu_map;
@@ -84,8 +84,8 @@ int main() {
 
                 // add
             case 2:
-                std::cout << std::endl << "Add selected" << std::endl;
-                tree.PutItem(addCarType());
+                std::cout << std::endl << "Add selected";
+                tree.PutItem(addCarType(tree));
                 break;
 
             default:
@@ -165,7 +165,7 @@ void displaySearchMenu(TreeType& searchTree) {
             std::cout << "No matching car found" << std::endl;
             input = "exit";
         } else if (searchTree.GetLength() == 1) {
-            std::cout << "Car found: " << std::endl;
+            std::cout << "Car found: " << searchTree.getRoot()->info.name << std::endl;
             input = "exit";
         } else if (searchTree.GetLength() > 1) {
             std::cout << "Search mode: enter a command (commands are not case sensitive):" << std::endl;
@@ -215,25 +215,42 @@ void displaySearchMenu(TreeType& searchTree) {
  * was better than in CarType..
  * @return 
  */
-CarType addCarType() {
+CarType addCarType(TreeType& tree) {
     CarType car;
 
     // car name
-    std::string name;
-    std::string attr = "";
-    std::cout << std::endl << "Please enter the name of the car: " << std::endl;
-    std::getline(std::cin, name);
-    car.name = name;
+    bool isCarNameValid = false;
+    while (isCarNameValid == false) {
+        std::string carName;
+        std::cout << std::endl << "Please enter the name of the car: " << std::endl;
+        std::getline(std::cin, carName);
+
+        if (tree.doesCarExist(carName) == true) {
+            std::cout << "That car already exists, enter a different name" << std::endl;    
+        }
+        else {
+            car.name = carName;
+            isCarNameValid = true;
+            std::cout << std::endl;
+        }
+    }
 
     // car attributes
-    std::cout << "_Please enter car attributes, one per line, when finished enter 'End': " << std::endl;
+    int count = 0;
+    std::string attr = "";
+    std::cout << "_Please enter car attributes, one per line: " << std::endl;
     while (attr != "end") {
-        std::cout << "Enter an attribute: " << std::endl;
+        std::cout << "Enter an attribute (when finished enter 'End'): " << std::endl;
         std::getline(std::cin, attr);
-        if (toLowerCase(attr) == "end") {
+
+        if (toLowerCase(attr) == "end" && count < 1) {
+            std::cout << "Please enter at least one attribute" << std::endl;
+            attr = "";
+        } else if (toLowerCase(attr) == "end") {
             break;
         } else {
             car.attributes.push_back(attr);
+            count++;
             toLowerCase(attr);
         }
     }

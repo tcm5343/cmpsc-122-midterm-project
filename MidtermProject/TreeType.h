@@ -7,7 +7,11 @@
 #define INPUT_FILE "autodata.txt"
 #define OUTPUT_FILE "results.txt"
 
-struct TreeNode;
+struct TreeNode {
+    CarType info;
+    TreeNode* left;
+    TreeNode* right;
+};
 
 enum OrderType {
     PRE_ORDER, IN_ORDER, POST_ORDER
@@ -54,6 +58,15 @@ public:
      * @param feature
      */
     void hasFeature(std::string feature);
+    
+    /**
+     * returns the root tree node
+     * @return 
+     */
+    TreeNode* getRoot();
+    
+    bool doesCarExist(const std::string carName);
+    
 private:
     
     /**
