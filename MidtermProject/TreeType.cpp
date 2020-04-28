@@ -91,7 +91,7 @@ void Insert(TreeNode*& tree, CarType item);
 void TreeType::PutItem(CarType item)
 // Calls recursive function Insert to insert item into tree.
 {
-//    item.addToFile();
+    //    item.addToFile();
     Insert(root, item);
 }
 
@@ -356,6 +356,7 @@ void show(TreeNode* tree, std::ofstream& outFile) {
     if (tree != NULL) {
         show(tree->left, outFile); // Print left subtree.
         outFile << tree->info.name << std::endl;
+        std::cout << tree->info.name << std::endl;
         show(tree->right, outFile); // Print right subtree.
     }
 }
@@ -363,10 +364,10 @@ void show(TreeNode* tree, std::ofstream& outFile) {
 void TreeType::showCommand(std::ofstream& outFile) const {
     show(root, outFile);
     outFile << std::endl;
+    std::cout << std::endl;
 }
 
-void findCar(TreeNode* tree, std::string carName)
-{
+void findCar(TreeNode* tree, std::string carName) {
     if (tree == NULL)
         std::cout << "Car was not found" << std::endl; // item is not found.
     else if (carName < tree->info.name)
@@ -383,18 +384,29 @@ void TreeType::checkAuto(std::string carName) {
     std::cout << std::endl;
 }
 
-void checkFeature(TreeNode* root, TreeNode* currentNode, std::string feature)
-{
-    if (currentNode != NULL) {
-        checkFeature(root, currentNode->left, feature); // iterate over the left subtree.
-        if (!currentNode->info.hasFeature(feature)) { // if the tree does not have the feature
-            Delete(root, currentNode->info);
+void checkFeature(TreeNode* root, std::string feature, TreeType& tree) {
+    if (root != NULL) {
+        checkFeature(root->left, feature, tree); // iterate over the left subtree.
+        if (root->info.hasFeature(feature)) { // if the tree has the feature add it to tree
+            tree.PutItem(root->info);
         }
-        checkFeature(root, currentNode->right, feature); // iterate over the right subtree.
+        checkFeature(root->right, feature, tree); // iterate over the right subtree.
     }
 }
 
+/**
+ * This function caused me so many problems simply due to my own negligence. 
+ * @param feature
+ */
 void TreeType::hasFeature(std::string feature) {
-    checkFeature(root, root, feature);
+    // create a new tree with the matching attributes
+    TreeType tree;
+    checkFeature(root, feature, tree);
+    this->MakeEmpty();
+    CopyTree(root, tree.root);
+    //    // clear the current search tree
+    //    // set the search tree to the new tree
+    //    this->operator =(tree);
+
     std::cout << std::endl;
 }

@@ -43,6 +43,11 @@ int main() {
     CarType car;
     car.name = "car";
     tree2.PutItem(car);
+    
+    CarType car2;
+    car2 = car;
+    tree2.PutItem(car2);
+    
     tree2.DeleteItem(car);
 
     std::map<std::string, int> default_menu_map;
@@ -155,18 +160,25 @@ void displaySearchMenu(TreeType& searchTree) {
     int map_value = -1;
 
     while (map_value != 0) {
-        std::cout << "Search mode: enter a command (commands are not case sensitive):" << std::endl;
-        std::cout << "hasFeature - search by an attribute" << std::endl;
-        std::cout << "checkAuto - print out the attributes about a car if it exists in your search list" << std::endl;
-        std::cout << "Show - Shows the current list of automobiles that match all of the features you have listed as criteria thus far" << std::endl;
-        std::cout << "Exit - exit search mode" << std::endl;
-        std::getline(std::cin, input); // read in user input (map key)
-        std::cout << std::endl;
+        if (searchTree.IsEmpty()) {
+            std::cout << "No matching car found" << std::endl;
+            input = "exit";
+        } else if (searchTree.GetLength() == 1) {
+            std::cout << "Car found: " << std::endl;
+            input = "exit";
+        } else if (searchTree.GetLength() > 1) {
+            std::cout << "Search mode: enter a command (commands are not case sensitive):" << std::endl;
+            std::cout << "hasFeature - search by an attribute" << std::endl;
+            std::cout << "checkAuto - print out the attributes about a car if it exists in your search list" << std::endl;
+            std::cout << "Show - Shows the current list of automobiles that match all of the features you have listed as criteria thus far" << std::endl;
+            std::cout << "Exit - exit search mode" << std::endl;
+            std::getline(std::cin, input); // read in user input (map key)
+            std::cout << std::endl;
+        }
 
         // input validation: checks if the key exists in the map
         map_value = validateInput(search_menu_map, input);
         std::string carName, feature;
-        std::vector<CarType> featurlessCars;
 
         switch (map_value) {
 
@@ -177,9 +189,6 @@ void displaySearchMenu(TreeType& searchTree) {
                 std::cout << "Enter a feature: " << std::endl;
                 std::getline(std::cin, feature);
                 searchTree.hasFeature(feature);
-//                for (std::vector<CarType>::iterator i = featurlessCars.begin(); i != featurlessCars.end(); ++i) {
-//                    searchTree.DeleteItem(*i);
-//                }
                 break;
 
             case 2: // checkAuto

@@ -49,6 +49,13 @@ public:
             return false;
         }
     }
+    
+    // not sure if this is needed
+    CarType operator=(const CarType c) {
+        name = c.name;
+        attributes = c.attributes;
+        return *this;
+    }
 
 private:
 
