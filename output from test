@@ -1,0 +1,124 @@
+Enter a command (commands are not case sensitive):
+Add - add a new automobile
+Search - put the program into search mode
+Quit - terminate the program
+asdf
+Invalid Command
+
+Enter a command (commands are not case sensitive):
+Add - add a new automobile
+Search - put the program into search mode
+Quit - terminate the program
+add
+
+Add selected
+Please enter the name of the car: 
+car
+That car already exists, enter a different name
+
+Please enter the name of the car: 
+car v3
+
+_Please enter car attributes, one per line: 
+Enter an attribute (when finished enter 'End'): 
+attr1
+Enter an attribute (when finished enter 'End'): 
+attr2
+Enter an attribute (when finished enter 'End'): 
+end
+
+Enter a command (commands are not case sensitive):
+Add - add a new automobile
+Search - put the program into search mode
+Quit - terminate the program
+search
+
+Search selected
+Please enter the name of the search:
+test search
+
+Search mode: enter a command (commands are not case sensitive):
+hasFeature - search by an attribute
+checkAuto - print out the attributes about a car if it exists in your search list
+Show - Shows the current list of automobiles that match all of the features you have listed as criteria thus far
+Exit - exit search mode
+show
+
+A
+Mazda 6
+asdfasdf
+bravo
+car
+car v2
+car v3
+car1
+car3
+zylo
+
+Search mode: enter a command (commands are not case sensitive):
+hasFeature - search by an attribute
+checkAuto - print out the attributes about a car if it exists in your search list
+Show - Shows the current list of automobiles that match all of the features you have listed as criteria thus far
+Exit - exit search mode
+hasfeature
+
+Enter a feature: 
+attr1
+
+Search mode: enter a command (commands are not case sensitive):
+hasFeature - search by an attribute
+checkAuto - print out the attributes about a car if it exists in your search list
+Show - Shows the current list of automobiles that match all of the features you have listed as criteria thus far
+Exit - exit search mode
+shOW
+
+A
+bravo
+car v2
+car v3
+car1
+car3
+zylo
+
+Search mode: enter a command (commands are not case sensitive):
+hasFeature - search by an attribute
+checkAuto - print out the attributes about a car if it exists in your search list
+Show - Shows the current list of automobiles that match all of the features you have listed as criteria thus far
+Exit - exit search mode
+hasfeature
+
+Enter a feature: 
+attr2
+
+Search mode: enter a command (commands are not case sensitive):
+hasFeature - search by an attribute
+checkAuto - print out the attributes about a car if it exists in your search list
+Show - Shows the current list of automobiles that match all of the features you have listed as criteria thus far
+Exit - exit search mode
+checkauto    
+
+Enter the name of the car: 
+car
+Car was not found
+
+Search mode: enter a command (commands are not case sensitive):
+hasFeature - search by an attribute
+checkAuto - print out the attributes about a car if it exists in your search list
+Show - Shows the current list of automobiles that match all of the features you have listed as criteria thus far
+Exit - exit search mode
+hasfeature
+
+Enter a feature: 
+attr3
+
+Car found: car1
+
+Enter a command (commands are not case sensitive):
+Add - add a new automobile
+Search - put the program into search mode
+Quit - terminate the program
+quit
+
+
+RUN FINISHED; exit value 0; real time: 1m 51s; user: 0ms; system: 0ms
+

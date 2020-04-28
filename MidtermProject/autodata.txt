@@ -7,3 +7,4 @@ Mazda 6,nice and sparkly,sparkly and nice
 asdfasdf,adsf
 car v2,fast,attr2,attr1
 car3,fast,attr1,attr2
+car v3,attr1,attr2

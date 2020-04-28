@@ -39,16 +39,9 @@ int main() {
     TreeType tree;
     tree.initialize();
 
-    //    TreeType tree2;
-    //    CarType car;
-    //    car.name = "car";
-    //    tree2.PutItem(car);
-    //    
-    //    CarType car2;
-    //    car2 = car;
-    //    tree2.PutItem(car2);
-    //    
-    //    tree2.DeleteItem(car);
+    if (PRINT_DEBUG) {
+        std::cout << "Tree loaded from autodata.txt" << std::endl;
+    }
 
     // an enum would probably be best but I never used a map before
     std::map<std::string, int> default_menu_map;
@@ -78,13 +71,19 @@ int main() {
 
                 // search
             case 1:
-                std::cout << std::endl << "Search selected" << std::endl;
+                if (PRINT_DEBUG) {
+                    std::cout << std::endl << "Search selected" << std::endl;
+                }
+                std::cout << std::endl;
                 displaySearchMenu(searchTree);
                 break;
 
                 // add
             case 2:
-                std::cout << std::endl << "Add selected";
+                if (PRINT_DEBUG) {
+                    std::cout << "Add selected";
+                }
+                std::cout << std::endl;
                 tree.PutItem(addCarType(tree));
                 break;
 
@@ -222,13 +221,12 @@ CarType addCarType(TreeType& tree) {
     bool isCarNameValid = false;
     while (isCarNameValid == false) {
         std::string carName;
-        std::cout << std::endl << "Please enter the name of the car: " << std::endl;
+        std::cout << "Please enter the name of the car: " << std::endl;
         std::getline(std::cin, carName);
 
         if (tree.doesCarExist(carName) == true) {
-            std::cout << "That car already exists, enter a different name" << std::endl;    
-        }
-        else {
+            std::cout << "That car already exists, enter a different name" << std::endl;
+        } else {
             car.name = carName;
             isCarNameValid = true;
             std::cout << std::endl;
@@ -255,6 +253,11 @@ CarType addCarType(TreeType& tree) {
         }
     }
     car.addToFile();
+    
+    if (PRINT_DEBUG) {
+        std::cout << std::endl << "Car added to autodata.txt";
+    }
+    
     return car;
 }
 

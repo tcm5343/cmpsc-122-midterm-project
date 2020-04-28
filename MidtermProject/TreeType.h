@@ -65,6 +65,11 @@ public:
      */
     TreeNode* getRoot();
     
+    /**
+     * iterates through list to see if a car name exists
+     * @param carName
+     * @return 
+     */
     bool doesCarExist(const std::string carName);
     
 private:
