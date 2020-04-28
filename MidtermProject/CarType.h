@@ -27,9 +27,29 @@ public:
     CarType();
     std::string name;
     std::vector<std::string> attributes;
+    
+    /**
+     * Returns the name of the car and all of its attributes on one line, 
+     * primarily used for testing
+     * @return 
+     */
     std::string toString();
+    
+    /**
+     * Writes a car to the input file with the correct CSV formatting
+     */
     void addToFile();
+    
+    /**
+     * prints the car to the console formatted
+     */
     void print();
+    
+    /**
+     * checks if the car has a specific feature
+     * @param feature
+     * @return - bool if it exists
+     */
     bool hasFeature(std::string feature);
 
     bool operator<(const CarType& d) {
@@ -50,7 +70,7 @@ public:
         }
     }
     
-    // not sure if this is needed
+    // pretty sure this is not needed but just for my own sanity
     CarType operator=(const CarType c) {
         name = c.name;
         attributes = c.attributes;

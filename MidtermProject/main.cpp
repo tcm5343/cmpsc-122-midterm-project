@@ -39,17 +39,18 @@ int main() {
     TreeType tree;
     tree.initialize();
 
-    TreeType tree2;
-    CarType car;
-    car.name = "car";
-    tree2.PutItem(car);
-    
-    CarType car2;
-    car2 = car;
-    tree2.PutItem(car2);
-    
-    tree2.DeleteItem(car);
+//    TreeType tree2;
+//    CarType car;
+//    car.name = "car";
+//    tree2.PutItem(car);
+//    
+//    CarType car2;
+//    car2 = car;
+//    tree2.PutItem(car2);
+//    
+//    tree2.DeleteItem(car);
 
+    // an enum would probably be best but I never used a map before
     std::map<std::string, int> default_menu_map;
     default_menu_map["quit"] = 0;
     default_menu_map["search"] = 1;

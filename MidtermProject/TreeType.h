@@ -30,6 +30,7 @@ public:
     void ResetTree(OrderType order);
     CarType GetNextItem(OrderType order, bool& finished);
     void Print(std::ofstream& outFile) const;
+    
     void initialize();
     void showCommand(std::ofstream& outFile) const;
     void checkAuto(std::string carName);
