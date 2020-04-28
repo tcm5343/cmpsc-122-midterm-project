@@ -31,12 +31,36 @@ public:
     CarType GetNextItem(OrderType order, bool& finished);
     void Print(std::ofstream& outFile) const;
     
+    /**
+     * fills the tree with data from input file
+     */
     void initialize();
+    
+    /**
+     * When the show command is calls it prints to the command line and to the
+     * output file
+     * @param outFile
+     */
     void showCommand(std::ofstream& outFile) const;
+    
+    /**
+     * checks to see if a car is in the search list
+     * @param carName
+     */
     void checkAuto(std::string carName);
+    
+    /**
+     * filters the search list if the car has the feature
+     * @param feature
+     */
     void hasFeature(std::string feature);
 private:
+    
+    /**
+     * reads from the input file
+     */
     void readFromCSV();
+    
     TreeNode* root;
     QueType preQue;
     QueType inQue;
